@@ -33,10 +33,19 @@ export function deleteCampus(campus) {
 }
 export function campusAddStudent(campus, student) {
   return function thunk(dispatch) {
-    return axios.put(`/api/campuses/${campus.id}`)
+    return axios.put(`/api/campuses/${campus.id}`, {student, add: true})
       .then(res => res.data)
-      .then(campus => {
-
+      .then(newCampus => {
+        dispatch(actions.addStudentToCampus(newCampus));
+      });
+  };
+}
+export function campusRemoveStudent(campus, student) {
+  return function thunk(dispatch) {
+    return axios.put(`/api/campuses/${campus.id}`, {student, add: false})
+      .then(res => res.data)
+      .then(newCampus => {
+        dispatch(actions.removeStudentFromCampus(newCampus));
       });
   };
 }

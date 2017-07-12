@@ -55,8 +55,22 @@ router.put('/:id', (req, res, next) => {
     });
 });
 
+router.put('/:id/students', (req, res, next) => {
+  Campus.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then((campus) => {
+      campus.updateStudent(req.body.student, req.body.add);
+    })
+    .then((campus) => {
+      res.status.json(campus);
+    })
+    .catch(console.error);
+});
+
 router.get('/:id/students', (req, res, next) => {
-  console.log(req.params.id);
   Campus.findOne({
       where: {
         id: req.params.id
