@@ -49,3 +49,8 @@ export function campusRemoveStudent(campus, student) {
       });
   };
 }
+export function setCurrentCampus(campus) {
+  return function thunk(dispatch) {
+    dispatch(actions.assignCurrentCampus(campus));
+  };
+}

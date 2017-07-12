@@ -6,6 +6,14 @@ export const ADD_CAMPUS = 'ADD_CAMPUS';
 export const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 export const ADD_STUDENT_TO_CAMPUS_BY_STUDENT_ID = 'ADD_STUDENT_TO_CAMPUS_BY_STUDENT_ID';
 export const REMOVE_STUDENT_FROM_CAMPUS_BY_STUDENT_ID = 'REMOVE_STUDENT_FROM_CAMPUS_BY_STUDENT_ID';
+export const SET_CURRET_CAMPUS = 'SET_CURRET_CAMPUS';
+
+export const assignCurrentCampus = function (campus) {
+  return {
+    type: SET_CURRET_CAMPUS,
+    campus
+  };
+};
 
 export const addCampus = function (campus) {
   return {

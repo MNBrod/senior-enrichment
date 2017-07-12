@@ -66,8 +66,12 @@ router.delete('/:id', (req, res, next) => {
       }
     })
     .then((result) => {
-      if (result === 0) res.sendStatus(404);
-      else res.sendStatus(204);
+      if (result[0] === 0) {res.sendStatus(404);}
+      else {
+        res.status(204);
+        Student.findAll({})
+        .then(students => res.json(students));
+      }
     })
     .catch((err) => {
       console.error(err);

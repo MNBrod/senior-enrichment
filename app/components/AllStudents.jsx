@@ -1,6 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+class AllStudents extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Students:</h1>
+        <ul>
+          {this.props.students.map((student) => {
+            return (
+              <Link
+                to={`/students/${student.id}`}
+                key={student.id}
+                student={student}>{student.name}</Link>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
+}
+
+
 /**
  * Maps state to props. If a student key is associated with ownProps,
  * overrides the state. (ie defaults to display state.students. Can be reused
@@ -11,32 +37,19 @@ import { connect } from 'react-redux';
  * @returns
  */
 function mapStateToProps(state, ownProps) {
-  if (ownProps.students) {
-    return {
-      students: ownProps.sudents
-    };
-  }
+  // if (ownProps.students) {
+  //   return {
+  //     students: ownProps.sudents
+  //   };
+  // }
+  // return {
+  //   students: state.students
+  // };
+  console.log('ownProps:', ownProps);
   return {
-    students: state.students
+    students: ownProps.students || state.students
   };
 }
 
-function AllStudents(props) {
-  return (
-    <div>
-      <h1>Students:</h1>
-      <ul>
-        {props.students.map((student) => {
-          return (
-            <Link
-              to={`/students/${student.id}`}
-              key={student.id}
-              student={student}>{student.name}</Link>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
 const Container = connect(mapStateToProps)(AllStudents);
 export default Container;

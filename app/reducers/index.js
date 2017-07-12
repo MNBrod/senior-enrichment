@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
 import campuses from './campuses.js';
 import students from './students.js';
+import currentCampus from './currentCampus.js';
+import currentStudent from './currentStudent.js';
 
 const reducer = combineReducers({
   campuses,
-  students
+  students,
+  currentCampus,
+  currentStudent
 });
 
 export const initialState = {
