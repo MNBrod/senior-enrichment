@@ -6,17 +6,18 @@ export const ADD_STUDENT = 'ADD_STUDENT';
 export const REMOVE_STUDENT = 'REMOVE_STUDENT';
 export const ADD_CAMPUS_TO_STUDENT = 'ADD_CAMPUS_TO_STUDENT';
 export const REMOVE_CAMPUS_FROM_STUDENT = 'REMOVE_CAMPUS_FROM_STUDENT';
+export const GET_STUDENTS = 'GET_STUDENTS';
 
-export const addCampus = function (campus) {
+export const addStudent = function (student) {
   return {
     type: ADD_STUDENT,
-    campus
+    student
   };
 };
-export const removeCampus = function (campus) {
+export const removeStudent = function (studentList) {
   return {
     type: REMOVE_STUDENT,
-    campus
+    studentList
   };
 };
 export const addCampusToStudent = function (student) {
@@ -29,6 +30,12 @@ export const removeCampusFromStudent = function (student) {
   return {
     type: REMOVE_CAMPUS_FROM_STUDENT,
     student
+  };
+};
+export const getStudents = function (students) {
+  return {
+    type: GET_STUDENTS,
+    students
   };
 };
 

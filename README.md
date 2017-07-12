@@ -45,8 +45,8 @@ Use at least sequelize, express, react, and redux when creating this app. You ca
   * can navigate to view that student's **Single Campus** from **Single Student**
 
 - Views: as a user I...
-  * see a list of all campuses on the **Campuses** view
-  * see a list of all students on the **Students** view
+  ✓ see a list of all campuses on the **Campuses** view
+  ✓ see a list of all students on the **Students** view
   * see details about a campus on the **Single Campus** view, including that campus's students
   * see details about a student on the **Single Student** view, including that student's campus
 
@@ -62,33 +62,33 @@ Use at least sequelize, express, react, and redux when creating this app. You ca
 
 ```
 GET
-- all campuses
-- a campus by id
-- all students
-- a student by id
+	✓ all campuses
+	✓ a campus by id
+	✓ all students
+	✓ a student by id
 ```
 
 ```
 POST
-- new campus
-- new student
+	✓ new campus
+	✓ new student
 ```
 
 ```
 PUT
-- updated student info for one student
-- updated campus info for one campus
+	✓ updated student info for one student
+	✓ updated campus info for one campus
 ```
 
 ```
 DELETE
-- a campus
-- a student
+	✓ a campus
+	✓ a student
 ```
 
 ### How to test functionality without a frontend
 - GET: use your browser
-- POST / PUT / DELETE : 
+- POST / PUT / DELETE :
  - CLI (command line interface) with `curl`
    - e.g. `curl -H "Content-Type: application/json" -X POST -d '{"username":"kate","password":"1234"}' http://localhost:3000/api/login`
    - `-H`: headers. `-X`: verb. `-d`: data (must be of the type specified in headers). http://[address]:[port]/[route_path]

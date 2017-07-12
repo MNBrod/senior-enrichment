@@ -78,5 +78,7 @@ router.get('/:id/students', (req, res, next) => {
       res.sendStatus(500);
     });
 });
+//when changing student make sure to send newly updated campus
+//in delete, make sure to return the new list of students
 
 module.exports = router;
