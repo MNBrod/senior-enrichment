@@ -46,8 +46,8 @@ class AllCampuses extends Component {
       });
   }
   handleRemoveButton(event) {
-    console.log(event.target.value);
-    let campus = this.props.campuses.filter(campus => +campus.id === +event.target.value)[0];
+    let campus = this.props.campuses.filter(element => +element.id === +event.target.value)[0];
+    console.log('CAMPUS:', campus);
     this.props.deleteCampus(campus)
       .then(() => this.props.fetchCampuses());
   }
@@ -84,6 +84,7 @@ class AllCampuses extends Component {
                 type="text"
                 onChange={this.handleTextChange}
               />
+              <img src={this.props.campusText.imageUrl} />
             </div>
             <button type="submit">Submit</button>
           </form>

@@ -8,7 +8,15 @@
 const User = require('./user');
 const Campus = require('./campus');
 const Student = require('./student');
-Student.belongsTo(Campus);
+Student.belongsTo(Campus, {
+	onDelete: 'cascade',
+	hooks: true
+});
 Campus.hasMany(Student);
+// Campus.hook('beforeDestroy', function () {
+// 	Student.destroy({where: {
+// 		campusId: this.id
+// 	}});
+// });
 
 module.exports = {User, Student, Campus};

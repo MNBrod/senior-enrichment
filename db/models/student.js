@@ -16,7 +16,7 @@ module.exports = db.define('students', {
   },
   campusId: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    //allowNull: false
   }
 }, {
   instanceMethods: {

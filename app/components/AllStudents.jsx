@@ -18,7 +18,7 @@ class AllStudents extends Component {
     this.props.fetchCampuses();
   }
 
-  handleTextChange (event) {
+  handleTextChange(event) {
     if (event.target.name === 'name') {
       this.props.updateStudentText({
         name: event.target.value,
@@ -33,7 +33,7 @@ class AllStudents extends Component {
     }
   }
 
-  handleTextSubmit (event) {
+  handleTextSubmit(event) {
     event.preventDefault();
     this.props.postStudent({
       name: this.props.studentText.name,
@@ -45,12 +45,14 @@ class AllStudents extends Component {
       email: ''
     });
   }
-  handleDeleteSubmit (event) {
+  handleDeleteSubmit(event) {
     event.preventDefault();
     let student = this.props.students.filter(student => +student.id === +event.target.value)[0];
     this.props.deleteStudent(student)
-    .then(() => this.props.fetchStudents());
+      .then(() => this.props.fetchStudents());
   }
+
+
   render() {
     return (
       <div>
@@ -62,7 +64,7 @@ class AllStudents extends Component {
                 <Link
                   to={`/students/${student.id}`}
                   value={student}>{student.name}</Link>
-                  <button onClick={this.handleDeleteSubmit} value={student.id}>DELETE</button>
+                <button onClick={this.handleDeleteSubmit} value={student.id}>DELETE</button>
               </div>
             );
           })}
@@ -110,7 +112,8 @@ function mapStateToProps(state, ownProps) {
   return {
     students,
     studentText: state.studentText,
-    campuses: state.campuses
+    campuses: state.campuses,
+    isSub: !!ownProps.students
   };
 }
 const mapDispatch = { fetchStudents, postStudent, updateStudentText, fetchCampuses, deleteStudent };
