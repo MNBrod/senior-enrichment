@@ -7,6 +7,22 @@ export const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 export const ADD_STUDENT_TO_CAMPUS_BY_STUDENT_ID = 'ADD_STUDENT_TO_CAMPUS_BY_STUDENT_ID';
 export const REMOVE_STUDENT_FROM_CAMPUS_BY_STUDENT_ID = 'REMOVE_STUDENT_FROM_CAMPUS_BY_STUDENT_ID';
 export const SET_CURRET_CAMPUS = 'SET_CURRET_CAMPUS';
+export const GET_CAMPUS_TEXT_INPUT = 'GET_CAMPUS_TEXT_INPUT';
+export const SUBMIT_TEXT_INPUT = 'SUBMIT_TEXT_INPUT';
+
+export const submitTextEntry = function (textFields) {
+  return {
+    type: SUBMIT_TEXT_INPUT,
+    textFields
+  };
+};
+
+export const updateTextEntry = function (textFields) {
+  return {
+    type: GET_CAMPUS_TEXT_INPUT,
+    textFields
+  };
+};
 
 export const assignCurrentCampus = function (campus) {
   return {

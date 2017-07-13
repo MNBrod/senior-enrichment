@@ -1,7 +1,6 @@
 'use strict';
 const router = require('express').Router();
 const Models = require('../../db/models');
-console.log(Models, 'HERE');
 const Student = Models.Student;
 
 router.get('/', (req, res, next) => {

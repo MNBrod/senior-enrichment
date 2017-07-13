@@ -44,13 +44,23 @@ export function studentAddCampus(student, campus) {
       });
   };
 }
-
-export function studentRemoveCampus(student) {
-  return function thunkfunction(dispatch) {
-    return axios.put(`/api/students/student.id`, {campusId: null})
-    .then(res => res.data)
-    .then(student => {
-      dispatch(actions.removeCampusFromStudent(student));
-    });
+export function setCurrentStudent(student) {
+  return function thunk(dispatch) {
+    dispatch(actions.assignCurrentStudent(student));
   };
 }
+export function updateStudentText(textFields) {
+  return function thunk(dispatch) {
+    dispatch(actions.updateStudentTextEntry(textFields));
+  };
+}
+
+// export function studentRemoveCampus(student) {
+//   return function thunkfunction(dispatch) {
+//     return axios.put(`/api/students/student.id`, {campusId: null})
+//     .then(res => res.data)
+//     .then(student => {
+//       dispatch(actions.removeCampusFromStudent(student));
+//     });
+//   };
+// }

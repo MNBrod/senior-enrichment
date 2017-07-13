@@ -12,11 +12,12 @@ export function fetchCampuses() {
   };
 }
 export function postCampus(campus) {
+  console.log('THUNK', campus);
   return function thunk(dispatch) {
     return axios.post('/api/campuses', campus)
       .then(res => res.data)
       .then(newCampus => {
-        dispatch(actions.addCampus(newCampus));
+        dispatch(actions.submitTextEntry(newCampus));
       })
       .catch(console.error);
   };
@@ -52,5 +53,10 @@ export function campusRemoveStudent(campus, student) {
 export function setCurrentCampus(campus) {
   return function thunk(dispatch) {
     dispatch(actions.assignCurrentCampus(campus));
+  };
+}
+export function updateCampusText(textFields) {
+  return function thunk(dispatch) {
+    dispatch(actions.updateTextEntry(textFields));
   };
 }

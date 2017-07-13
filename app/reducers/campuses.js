@@ -4,7 +4,6 @@ export default function reducer(state = [], action) {
   console.log(action.type);
   switch (action.type) {
     case allActions.GET_CAMPUSES:
-      console.log('in reducer:', action.campuses);
       return action.campuses;
     case allActions.ADD_CAMPUS:
       return Object.assign({}, state, {campuses: [...state.campuses, action.campus]});

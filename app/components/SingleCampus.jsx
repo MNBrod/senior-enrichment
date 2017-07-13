@@ -13,21 +13,17 @@ class SingleCampus extends Component {
   // componentWillMount() {
   //   this.props.fetchCampuses();
   //   this.props.fetchStudents();
-  //   console.log('will mount');
   // }
   componentDidMount() {
-    console.log('mounted');
     this.props.fetchCampuses();
     this.props.fetchStudents();
     let id = this.props.match.params.id;
     this.props.setCurrentCampus(this.props.campuses.filter(element => {
-      console.log(+element.id === +id);
       return +element.id === +id;
     })[0]);
   }
 
   render() {
-    console.log('Props: ', this.props);
     return (
       <div>
         <h1>{this.props.campus.name}</h1>
@@ -42,7 +38,6 @@ class SingleCampus extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  //console.log('mapping', state);
   return {
     campus: state.currentCampus,
     students: state.students,
