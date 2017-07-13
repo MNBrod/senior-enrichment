@@ -5,9 +5,9 @@ export default function reducer(state = [], action) {
     case allActions.GET_STUDENTS:
       return action.students;
     case allActions.ADD_STUDENT:
-      return Object.assign({}, state, {students: [...state.students, action.student]});
+      return action.students;
     case allActions.REMOVE_STUDENT:
-      return Object.assign({}, state, {students: action.studentList});
+      return action.students;
     default:
       return state;
   }

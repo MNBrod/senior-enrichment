@@ -4,13 +4,15 @@ import students from './students.js';
 import currentCampus from './currentCampus.js';
 import currentStudent from './currentStudent.js';
 import campusText from './campusText.js';
+import studentText from './studentText.js';
 
 const reducer = combineReducers({
   campuses,
   students,
   currentCampus,
   currentStudent,
-  campusText
+  campusText,
+  studentText
 });
 
 export const initialState = {

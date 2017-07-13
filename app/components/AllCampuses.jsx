@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addCampus, fetchCampuses, updateCampusText, postCampus } from '../thunks/';
+import { addCampus, fetchCampuses, updateCampusText, postCampus, deleteCampus } from '../thunks/';
 
 
 class AllCampuses extends Component {
@@ -9,6 +9,7 @@ class AllCampuses extends Component {
     super(props);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleTextSubmit = this.handleTextSubmit.bind(this);
+    this.handleRemoveButton = this.handleRemoveButton.bind(this);
   }
 
   componentDidMount() {
@@ -35,13 +36,20 @@ class AllCampuses extends Component {
     this.props.postCampus({
       name: this.props.campusText.name,
       imageUrl: this.props.campusText.imageUrl
-    });
-    this.props.fetchCampuses();
-    this.props.updateCampusText({
-      name: '',
-      imageUrl: ''
-    });
-
+    })
+      .then(() => this.props.fetchCampuses())
+      .then(() => {
+        this.props.updateCampusText({
+          name: '',
+          imageUrl: ''
+        });
+      });
+  }
+  handleRemoveButton(event) {
+    console.log(event.target.value);
+    let campus = this.props.campuses.filter(campus => +campus.id === +event.target.value)[0];
+    this.props.deleteCampus(campus)
+      .then(() => this.props.fetchCampuses());
   }
 
   render() {
@@ -53,6 +61,7 @@ class AllCampuses extends Component {
             return (
               <div key={campus.id}>
                 <Link to={`/campuses/${campus.id}`} value={campus}>{campus.name}</Link>
+                <button onClick={this.handleRemoveButton} value={campus.id}>Remove</button>
               </div>
             );
           })}
@@ -93,7 +102,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 
-const mapDispatch = { addCampus, fetchCampuses, updateCampusText, postCampus };
+const mapDispatch = { addCampus, fetchCampuses, updateCampusText, postCampus, deleteCampus };
 
 const Container = connect(mapStateToProps, mapDispatch)(AllCampuses);
 export default Container;

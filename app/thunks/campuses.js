@@ -25,7 +25,10 @@ export function postCampus(campus) {
 export function deleteCampus(campus) {
   return function thunk(dispatch) {
     return axios.delete(`/api/campuses/${campus.id}`)
-      .then(res => res.data)
+      .then(res => {
+        console.log('RED', res);
+        return res.data;
+      })
       .then(campuses => {
         dispatch(actions.removeCampus(campuses));
       })
@@ -42,7 +45,6 @@ export function deleteCampus(campus) {
 //   };
 // }
 export function updateCampus(campus, newProps) {
-  console.log('NEW PROPS:', newProps);
   return function thunk(dispatch) {
     return axios.put(`/api/campuses/${campus.id}`, newProps)
       .then(res => res.data)

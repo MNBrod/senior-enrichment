@@ -2,8 +2,7 @@ import * as allActions from '../actions';
 
 export default function reducer (studentText = {
   name: '',
-  email: '',
-  campusId: 0
+  email: ''
 }, action) {
   switch (action.type) {
     case allActions.GET_STUDENT_TEXT_INPUT:

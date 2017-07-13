@@ -1,19 +1,56 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStudents } from '../thunks/';
+import { fetchStudents, postStudent, updateStudentText, fetchCampuses, deleteStudent } from '../thunks/';
 
 
 class AllStudents extends Component {
   constructor(props) {
     super(props);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleTextSubmit = this.handleTextSubmit.bind(this);
+    this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
   }
   componentDidMount() {
     if (this.props.students.length === 0) {
       this.props.fetchStudents();
     }
+    this.props.fetchCampuses();
   }
 
+  handleTextChange (event) {
+    if (event.target.name === 'name') {
+      this.props.updateStudentText({
+        name: event.target.value,
+        email: this.props.studentText.email
+      });
+    }
+    else {
+      this.props.updateStudentText({
+        name: this.props.studentText.name,
+        email: event.target.value
+      });
+    }
+  }
+
+  handleTextSubmit (event) {
+    event.preventDefault();
+    this.props.postStudent({
+      name: this.props.studentText.name,
+      email: this.props.studentText.email,
+      campusId: event.target.select.value
+    });
+    this.props.updateStudentText({
+      name: '',
+      email: ''
+    });
+  }
+  handleDeleteSubmit (event) {
+    event.preventDefault();
+    let student = this.props.students.filter(student => +student.id === +event.target.value)[0];
+    this.props.deleteStudent(student)
+    .then(() => this.props.fetchStudents());
+  }
   render() {
     return (
       <div>
@@ -25,10 +62,43 @@ class AllStudents extends Component {
                 <Link
                   to={`/students/${student.id}`}
                   value={student}>{student.name}</Link>
+                  <button onClick={this.handleDeleteSubmit} value={student.id}>DELETE</button>
               </div>
             );
           })}
         </ul>
+        <h3>New Student:</h3>
+        <form onSubmit={this.handleTextSubmit}>
+          <div>
+            <lable>Student Name: </lable>
+            <input
+              value={this.props.studentText.name}
+              name="name"
+              type="text"
+              onChange={this.handleTextChange}
+            />
+          </div>
+          <div>
+            <label>Email: </label>
+            <input
+              value={this.props.studentText.imageUrl}
+              name="imageUrl"
+              type="text"
+              onChange={this.handleTextChange}
+            />
+          </div>
+          <div>
+            <lable>Pick a campus: </lable>
+            <select name="select">
+              {this.props.campuses.map(campus => {
+                return (
+                  <option key={campus.id} value={campus.id}>{campus.name}</option>
+                );
+              })}
+            </select>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     );
   }
@@ -36,19 +106,13 @@ class AllStudents extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-  // if (ownProps.students) {
-  //   return {
-  //     students: ownProps.sudents
-  //   };
-  // }
-  // return {
-  //   students: state.students
-  // };
   let students = ownProps.students || state.students;
   return {
-    students
+    students,
+    studentText: state.studentText,
+    campuses: state.campuses
   };
 }
-const mapDispatch = { fetchStudents };
+const mapDispatch = { fetchStudents, postStudent, updateStudentText, fetchCampuses, deleteStudent };
 const Container = connect(mapStateToProps, mapDispatch)(AllStudents);
 export default Container;

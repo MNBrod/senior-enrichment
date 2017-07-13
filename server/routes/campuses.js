@@ -95,6 +95,24 @@ router.get('/:id/students', (req, res, next) => {
       res.sendStatus(500);
     });
 });
+/**
+ * uses two sequelize queries, so this DOES NOT RETURN 204,
+ * it returns 201
+ */
+router.delete('/:id', (req, res, next) => {
+  Campus.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(() => {
+    return Campus.findAll({});
+  })
+  .then((campuses) => {
+    console.log('CAMPUSES FROM ROUTE', campuses[0]);
+    res.status(201).json(campuses);
+  });
+});
 //when changing student make sure to send newly updated campus
 //in delete, make sure to return the new list of students
 

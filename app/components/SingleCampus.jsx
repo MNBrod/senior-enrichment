@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AllStudents from './AllStudents.jsx';
 import UpdateCampus from './UpdateCampus.jsx';
-//import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { campusAddStudent, fetchStudents, setCurrentCampus, fetchCampuses, studentAddCampus } from '../thunks/';
 
@@ -33,6 +32,7 @@ class SingleCampus extends Component {
     this.props.studentAddCampus(student, this.props.campus)
     .then(() => {
       this.props.fetchStudents();
+      this.forceUpdate();
     });
 
   }
@@ -50,6 +50,7 @@ class SingleCampus extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>Add Student: </label>
           <select name="select">
+            <option>-</option>
             {otherStudents.map((student) => {
               return (
                 <option key={student.id} value={student.id}>{student.name}</option>

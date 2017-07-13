@@ -10,6 +10,15 @@ export const GET_STUDENTS = 'GET_STUDENTS';
 export const SET_CURRENT_STUDENT = 'SET_CURRENT_STUDENT';
 export const GET_STUDENT_TEXT_INPUT = 'GET_STUDENT_TEXT_INPUT';
 export const SUBMIT_STUDENT_TEXT_INPUT = 'SUBMIT_STUDENT_TEXT_INPUT';
+export const UPDATE_STUDENT_PROPS = 'UPDATE_STUDENT_PROPS';
+
+
+export const updateStudentProps = function (student) {
+  return {
+    type: UPDATE_STUDENT_PROPS,
+    student
+  };
+};
 
 export const submitStudentTextEntry = function (textFields) {
   return {
@@ -32,16 +41,16 @@ export const assignCurrentStudent = function (student) {
   };
 };
 
-export const addStudent = function (student) {
+export const addStudent = function (students) {
   return {
     type: ADD_STUDENT,
-    student
+    students
   };
 };
-export const removeStudent = function (studentList) {
+export const removeStudent = function (students) {
   return {
     type: REMOVE_STUDENT,
-    studentList
+    students
   };
 };
 export const addCampusToStudent = function (student) {

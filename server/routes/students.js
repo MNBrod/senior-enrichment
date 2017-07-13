@@ -17,7 +17,10 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Student.create(req.body)
     .then((val) => {
-      res.status(201).json(val);
+      return Student.findAll({});
+    })
+    .then((students) => {
+      res.status(201).json(students);
     })
     .catch((err) => {
       console.error(err);
@@ -47,7 +50,9 @@ router.put('/:id', (req, res, next) => {
       }
     })
     .then((student) => {
-      student.update(req.body, {returning: true});
+      student.update(req.body, {
+        returning: true
+      });
     })
     .then((newStudent) => {
       res.status(200).json(newStudent);
@@ -60,22 +65,17 @@ router.put('/:id', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
   Student.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-    .then((result) => {
-      if (result[0] === 0) {res.sendStatus(404);}
-      else {
-        res.status(204);
-        Student.findAll({})
-        .then(students => res.json(students));
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(() => {
+    return Student.findAll({});
+  })
+  .then((students) => {
+    console.log('students FROM ROUTE', students[0]);
+    res.status(201).json(students);
+  });
 });
 
 router.put('/:id/campus', (req, res, next) => {

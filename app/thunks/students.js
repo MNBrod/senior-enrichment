@@ -27,8 +27,9 @@ export function deleteStudent(student) {
   return function thunk(dispatch) {
     return axios.delete(`/api/students/${student.id}`)
       .then(res => res.data)
-      .then((studentList) => {
-        dispatch(actions.deleteStudent(studentList));
+      .then((students) => {
+        console.log('STUDEBT DELETE', students);
+        dispatch(actions.removeStudent(students));
       });
   };
 }
@@ -52,6 +53,16 @@ export function setCurrentStudent(student) {
 export function updateStudentText(textFields) {
   return function thunk(dispatch) {
     dispatch(actions.updateStudentTextEntry(textFields));
+  };
+}
+
+export function updateStudent(student, newProps) {
+  return function thunk(dispatch) {
+    return axios.put(`/api/students/${student.id}`, newProps)
+      .then(res => res.data)
+      .then(updated => {
+        dispatch(actions.updateStudentProps(updated));
+      });
   };
 }
 
