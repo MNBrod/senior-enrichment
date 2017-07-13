@@ -16,7 +16,7 @@ class AllCampuses extends Component {
   }
 
   handleTextChange(event) {
-    if (event.target.name === 'title') {
+    if (event.target.name === 'name') {
       this.props.updateCampusText({
         name: event.target.value,
         imageUrl: this.props.campusText.imageUrl
@@ -61,8 +61,8 @@ class AllCampuses extends Component {
             <div>
               <lable>Campus Name</lable>
               <input
-                value={this.props.campusText.title}
-                name="title"
+                value={this.props.campusText.name}
+                name="name"
                 type="text"
                 onChange={this.handleTextChange}
               />

@@ -7,7 +7,7 @@ export const REMOVE_STUDENT = 'REMOVE_STUDENT';
 export const ADD_CAMPUS_TO_STUDENT = 'ADD_CAMPUS_TO_STUDENT';
 export const REMOVE_CAMPUS_FROM_STUDENT = 'REMOVE_CAMPUS_FROM_STUDENT';
 export const GET_STUDENTS = 'GET_STUDENTS';
-export const SET_CURRET_STUDENT = 'SET_CURRET_STUDENT';
+export const SET_CURRENT_STUDENT = 'SET_CURRENT_STUDENT';
 export const GET_STUDENT_TEXT_INPUT = 'GET_STUDENT_TEXT_INPUT';
 export const SUBMIT_STUDENT_TEXT_INPUT = 'SUBMIT_STUDENT_TEXT_INPUT';
 
@@ -27,7 +27,7 @@ export const updateStudentTextEntry = function (textFields) {
 
 export const assignCurrentStudent = function (student) {
   return {
-    type: SET_CURRET_STUDENT,
+    type: SET_CURRENT_STUDENT,
     student
   };
 };

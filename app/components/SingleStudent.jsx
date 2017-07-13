@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setCurrentStudent, setCurrentCampus, fetchCampuses, fetchStudents } from '../thunks/';
 
 
@@ -32,7 +33,7 @@ class SingleStudent extends Component {
         </div>
         <div>
           <h2>Campus: </h2>
-          <p>{this.props.campus.name}</p>
+          <Link to={`/campuses/${this.props.campus.id}`}>{this.props.campus.name}</Link>
         </div>
       </div>
     );

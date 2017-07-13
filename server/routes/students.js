@@ -47,10 +47,10 @@ router.put('/:id', (req, res, next) => {
       }
     })
     .then((student) => {
-      student.update(req.body);
+      student.update(req.body, {returning: true});
     })
-    .then((numUpdated) => {
-      res.status(200).send('Updated ' + numUpdated + ' students');
+    .then((newStudent) => {
+      res.status(200).json(newStudent);
     })
     .catch((err) => {
       console.error(err);

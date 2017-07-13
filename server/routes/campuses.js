@@ -47,7 +47,10 @@ router.put('/:id', (req, res, next) => {
       }
     })
     .then((campus) => {
-      campus.update(req.body);
+      return campus.update(req.body, {returning: true});
+    })
+    .then(newcampus => {
+      res.json(newcampus);
     })
     .catch((err) => {
       console.error(err);

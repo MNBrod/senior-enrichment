@@ -32,18 +32,31 @@ export function deleteCampus(campus) {
       .catch(console.error);
   };
 }
-export function campusAddStudent(campus, student) {
+// export function campusAddStudent(campus, student) {
+//   return function thunk(dispatch) {
+//     return axios.put(`/api/campuses/${campus.id}`, {student, add: true})
+//       .then(res => res.data)
+//       .then(newCampus => {
+//         dispatch(actions.addStudentToCampus(newCampus));
+//       });
+//   };
+// }
+export function updateCampus(campus, newProps) {
+  console.log('NEW PROPS:', newProps);
   return function thunk(dispatch) {
-    return axios.put(`/api/campuses/${campus.id}`, {student, add: true})
+    return axios.put(`/api/campuses/${campus.id}`, newProps)
       .then(res => res.data)
-      .then(newCampus => {
-        dispatch(actions.addStudentToCampus(newCampus));
+      .then(updated => {
+        dispatch(actions.updateCampusProperties(updated));
       });
   };
 }
 export function campusRemoveStudent(campus, student) {
   return function thunk(dispatch) {
-    return axios.put(`/api/campuses/${campus.id}`, {student, add: false})
+    return axios.put(`/api/campuses/${campus.id}`, {
+        student,
+        add: false
+      })
       .then(res => res.data)
       .then(newCampus => {
         dispatch(actions.removeStudentFromCampus(newCampus));
