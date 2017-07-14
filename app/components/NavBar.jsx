@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class NavBar extends Component {
+
   render() {
     return (
       <nav className="navbar navbar-default" id="makethisworkpls">
@@ -13,10 +14,10 @@ export default class NavBar extends Component {
         <div className="collapse navbar-collapse">
           <ul className="nav navbar-nav">
             <li className="home-image" />
-            <li>
+            <li id="AllCampuses">
               <Link to="/campuses">All Campuses</Link>
             </li>
-            <li>
+            <li id="AllStudents">
               <Link to="/students">All Students</Link>
             </li>
           </ul>

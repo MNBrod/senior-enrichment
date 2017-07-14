@@ -15,12 +15,5 @@ const reducer = combineReducers({
   studentText
 });
 
-export const initialState = {
-  campuses: [],
-  students: [],
-  currentStudent: {},
-  currentCampus: {}
-};
-
 const rootReducer = reducer;
 export default rootReducer;

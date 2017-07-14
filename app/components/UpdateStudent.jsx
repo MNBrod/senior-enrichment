@@ -64,7 +64,7 @@ class UpdateStudent extends Component {
   render() {
     return (
       <div>
-        <h2>Edit Campus:</h2>
+        <h2>Edit Student:</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Name: </label>
