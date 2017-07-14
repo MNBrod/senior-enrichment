@@ -7,6 +7,7 @@ import AllCampuses from './components/AllCampuses.jsx';
 import AllStudents from './components/AllStudents.jsx';
 import SingleStudent from './components/SingleStudent.jsx';
 import SingleCampus from './components/SingleCampus.jsx';
+import NewCampus from './components/NewCampus.jsx';
 import Home from './components/Home.jsx';
 import NavBar from './components/NavBar.jsx';
 import store from './store';
@@ -21,8 +22,9 @@ render(
         <Switch>
           <Route exact path="/campuses" component={AllCampuses} />
           <Route exact path="/students" component={AllStudents} />
-          <Route path="/students/:id" component={SingleStudent} />
-          <Route path="/campuses/:id" component={SingleCampus} />
+          <Route exact path="/campuses/new" component={NewCampus} />
+          <Route exact path="/students/:id" component={SingleStudent} />
+          <Route exact path="/campuses/:id" component={SingleCampus} />
           <Route exact path="/" component={Home} />
         </Switch>
         </div>

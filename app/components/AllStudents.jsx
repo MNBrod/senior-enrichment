@@ -57,10 +57,10 @@ class AllStudents extends Component {
     return (
       <div className="container">
         <h1>Students:</h1>
-        <div className="user-list">
+        <div>
           {this.props.students.map((student) => {
             return (
-              <div className="list-group-item min-content user-item" key={student.id}>
+              <div className="list-group-item col-sm-4" key={student.id}>
                 <div className="media">
                   <div className="media-middle media-body">
                     <Link

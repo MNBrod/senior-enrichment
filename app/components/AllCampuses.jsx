@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import NewCampus from './NewCampus.jsx';
 import { addCampus, fetchCampuses, updateCampusText, postCampus, deleteCampus } from '../thunks/';
 
 
 class AllCampuses extends Component {
   constructor(props) {
     super(props);
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleTextSubmit = this.handleTextSubmit.bind(this);
     this.handleRemoveButton = this.handleRemoveButton.bind(this);
   }
 
@@ -16,35 +15,7 @@ class AllCampuses extends Component {
     this.props.fetchCampuses();
   }
 
-  handleTextChange(event) {
-    if (event.target.name === 'name') {
-      this.props.updateCampusText({
-        name: event.target.value,
-        imageUrl: this.props.campusText.imageUrl
-      });
-    }
-    else {
-      this.props.updateCampusText({
-        name: this.props.campusText.name,
-        imageUrl: event.target.value
-      });
-    }
-  }
 
-  handleTextSubmit(event) {
-    event.preventDefault();
-    this.props.postCampus({
-      name: this.props.campusText.name,
-      imageUrl: this.props.campusText.imageUrl
-    })
-      .then(() => this.props.fetchCampuses())
-      .then(() => {
-        this.props.updateCampusText({
-          name: '',
-          imageUrl: ''
-        });
-      });
-  }
   handleRemoveButton(event) {
     console.log('event:', event.target.value);
     let campus = this.props.campuses.filter(element => +element.id === +event.target.value)[0];
@@ -77,33 +48,19 @@ class AllCampuses extends Component {
               </div>
             );
           })}
-        </div>
-        <hr />
-        <div>
-          <h3>New Campus:</h3>
-          <form className="form-horizontal" onSubmit={this.handleTextSubmit}>
-            <div className="form-group">
-              <label className="control-label">Campus Name: </label>
-              <input
-                value={this.props.campusText.name}
-                name="name"
-                type="text"
-                className="form-control"
-                onChange={this.handleTextChange}
-              />
-              <label className="control-label">Image URL:</label>
-              <input
-                value={this.props.campusText.imageUrl}
-                name="imageUrl"
-                type="text"
-                className="form-control"
-                onChange={this.handleTextChange}
-              />
-              <img src={this.props.campusText.imageUrl} />
-
-              <button className="btn btn-submit" type="submit">Submit</button>
+          <div className="list-group-item col-sm-4">
+            <div className="media">
+              <div className="media-left">
+                <img
+                src="https://cdn3.iconfinder.com/data/icons/education/512/academy-512.png"
+                className="media-object img-circle"
+                width="30px" />
+              </div>
+              <div className="media-body">
+                <Link to={'/campuses/new'}>New Campus</Link>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     );
