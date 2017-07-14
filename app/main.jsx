@@ -8,6 +8,7 @@ import AllStudents from './components/AllStudents.jsx';
 import SingleStudent from './components/SingleStudent.jsx';
 import SingleCampus from './components/SingleCampus.jsx';
 import NewCampus from './components/NewCampus.jsx';
+import NewStudent from './components/NewStudent.jsx';
 import Home from './components/Home.jsx';
 import NavBar from './components/NavBar.jsx';
 import store from './store';
@@ -23,6 +24,7 @@ render(
           <Route exact path="/campuses" component={AllCampuses} />
           <Route exact path="/students" component={AllStudents} />
           <Route exact path="/campuses/new" component={NewCampus} />
+          <Route exact path="/students/new" component={NewStudent} />
           <Route exact path="/students/:id" component={SingleStudent} />
           <Route exact path="/campuses/:id" component={SingleCampus} />
           <Route exact path="/" component={Home} />

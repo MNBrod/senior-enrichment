@@ -7,8 +7,6 @@ import { fetchStudents, postStudent, updateStudentText, fetchCampuses, deleteStu
 class AllStudents extends Component {
   constructor(props) {
     super(props);
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleTextSubmit = this.handleTextSubmit.bind(this);
     this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
   }
   componentDidMount() {
@@ -18,33 +16,7 @@ class AllStudents extends Component {
     this.props.fetchCampuses();
   }
 
-  handleTextChange(event) {
-    if (event.target.name === 'name') {
-      this.props.updateStudentText({
-        name: event.target.value,
-        email: this.props.studentText.email
-      });
-    }
-    else {
-      this.props.updateStudentText({
-        name: this.props.studentText.name,
-        email: event.target.value
-      });
-    }
-  }
 
-  handleTextSubmit(event) {
-    event.preventDefault();
-    this.props.postStudent({
-      name: this.props.studentText.name,
-      email: this.props.studentText.email,
-      campusId: event.target.select.value
-    });
-    this.props.updateStudentText({
-      name: '',
-      email: ''
-    });
-  }
   handleDeleteSubmit(event) {
     event.preventDefault();
     let student = this.props.students.filter(student => +student.id === +event.target.value)[0];
@@ -76,39 +48,12 @@ class AllStudents extends Component {
               </div>
             );
           })}
+          <div className="list-group-item col-sm-4">
+            <div className="media-body">
+              <Link to={'/students/new'}>New Student</Link>
+            </div>
+          </div>
         </div>
-        <h3>New Student:</h3>
-        <form onSubmit={this.handleTextSubmit}>
-          <div>
-            <lable>Student Name: </lable>
-            <input
-              value={this.props.studentText.name}
-              name="name"
-              type="text"
-              onChange={this.handleTextChange}
-            />
-          </div>
-          <div>
-            <label>Email: </label>
-            <input
-              value={this.props.studentText.imageUrl}
-              name="imageUrl"
-              type="text"
-              onChange={this.handleTextChange}
-            />
-          </div>
-          <div>
-            <lable>Pick a campus: </lable>
-            <select name="select">
-              {this.props.campuses.map(campus => {
-                return (
-                  <option key={campus.id} value={campus.id}>{campus.name}</option>
-                );
-              })}
-            </select>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
       </div>
     );
   }
