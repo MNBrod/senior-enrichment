@@ -57,51 +57,53 @@ class AllCampuses extends Component {
     return (
       <div className="container">
         <h1>Campuses:</h1>
-        <div >
+        <div>
           {this.props.campuses.map((campus) => {
             return (
-              <div className="list-group-item min-content" key={campus.id}>
+              <div className="list-group-item col-sm-4" key={campus.id}>
                 <div className="media">
-                  <div className="media-left media-middle icon-container">
+                  <div className="media-left">
                     <img src={campus.imageUrl} width="30px" className="media-object img-circle" />
                   </div>
-                </div>
-                <div className="media-middle media-body">
-                  <Link to={`/campuses/${campus.id}`} value={campus}>{campus.name}</Link>
-                </div>
-                <div className="media-right media-middle">
-                  <button onClick={this.handleRemoveButton} value={campus.id}>
-                    DELETE
+                  <div className="media-body">
+                    <Link to={`/campuses/${campus.id}`} value={campus}>{campus.name}</Link>
+                  </div>
+                  <div className="media-right">
+                    <button onClick={this.handleRemoveButton} value={campus.id}>
+                      DELETE
                   </button>
+                  </div>
                 </div>
               </div>
             );
           })}
-          <div className="container">
-            <h3>New Campus:</h3>
-            <form onSubmit={this.handleTextSubmit}>
-              <div>
-                <lable>Campus Name</lable>
-                <input
-                  value={this.props.campusText.name}
-                  name="name"
-                  type="text"
-                  onChange={this.handleTextChange}
-                />
-              </div>
-              <div>
-                <label>Image URL:</label>
-                <input
-                  value={this.props.campusText.imageUrl}
-                  name="imageUrl"
-                  type="text"
-                  onChange={this.handleTextChange}
-                />
-                <img src={this.props.campusText.imageUrl} />
-              </div>
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+        </div>
+        <hr />
+        <div>
+          <h3>New Campus:</h3>
+          <form className="form-horizontal" onSubmit={this.handleTextSubmit}>
+            <div className="form-group">
+              <label className="control-label">Campus Name: </label>
+              <input
+                value={this.props.campusText.name}
+                name="name"
+                type="text"
+                className="form-control"
+                onChange={this.handleTextChange}
+              />
+              <label className="control-label">Image URL:</label>
+              <input
+                value={this.props.campusText.imageUrl}
+                name="imageUrl"
+                type="text"
+                className="form-control"
+                onChange={this.handleTextChange}
+              />
+              <img src={this.props.campusText.imageUrl} />
+
+              <button className="btn btn-submit" type="submit">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
     );

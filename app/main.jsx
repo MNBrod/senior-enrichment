@@ -12,7 +12,6 @@ import NavBar from './components/NavBar.jsx';
 import store from './store';
 // import Root from './components/Root';
 
-
 render(
   <Provider store={store}>
     <div>

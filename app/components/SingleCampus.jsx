@@ -63,8 +63,8 @@ class SingleCampus extends Component {
               <button type="submit">Add this student</button>
             </div>
           </form>
+          <UpdateCampus campus={this.props.campus} />
         </div>
-        <UpdateCampus campus={this.props.campus} />
       </div>
     );
   }
