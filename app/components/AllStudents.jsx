@@ -55,20 +55,28 @@ class AllStudents extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Students:</h1>
-        <ul>
+        <div className="user-list">
           {this.props.students.map((student) => {
             return (
-              <div key={student.id}>
-                <Link
-                  to={`/students/${student.id}`}
-                  value={student}>{student.name}</Link>
-                <button onClick={this.handleDeleteSubmit} value={student.id}>DELETE</button>
+              <div className="list-group-item min-content user-item" key={student.id}>
+                <div className="media">
+                  <div className="media-middle media-body">
+                    <Link
+                      to={`/students/${student.id}`}
+                      value={student}>{student.name}</Link>
+                  </div>
+                  <div className="media-right media-middle">
+                    <button onClick={this.handleDeleteSubmit} value={student.id}>
+                      DELETE
+                    </button>
+                  </div>
+                </div>
               </div>
             );
           })}
-        </ul>
+        </div>
         <h3>New Student:</h3>
         <form onSubmit={this.handleTextSubmit}>
           <div>

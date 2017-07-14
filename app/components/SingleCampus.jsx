@@ -14,26 +14,26 @@ class SingleCampus extends Component {
 
   componentDidMount() {
     this.props.fetchCampuses()
-    .then(() => {
-      return this.props.fetchStudents();
-    })
-    .then(() => {
-      let id = this.props.match.params.id;
-      this.props.setCurrentCampus(this.props.campuses.filter(element => {
-        return +element.id === +id;
-      })[0]);
-    });
+      .then(() => {
+        return this.props.fetchStudents();
+      })
+      .then(() => {
+        let id = this.props.match.params.id;
+        this.props.setCurrentCampus(this.props.campuses.filter(element => {
+          return +element.id === +id;
+        })[0]);
+      });
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault();
     let student = this.props.students.filter(element => +element.id === +event.target.select.value)[0];
     console.log('EVENT:', student);
     this.props.studentAddCampus(student, this.props.campus)
-    .then(() => {
-      this.props.fetchStudents();
-      this.forceUpdate();
-    });
+      .then(() => {
+        this.props.fetchStudents();
+        this.forceUpdate();
+      });
 
   }
 
@@ -42,23 +42,28 @@ class SingleCampus extends Component {
     return (
       <div>
         <h1>{this.props.campus.name}</h1>
-        <img src={this.props.campus.imageUrl} />
+        <img src={this.props.campus.imageUrl} width="20%" height="20%" className="img-circle" />
         <AllStudents students={this.props.students.filter((student) => {
           return +student.campusId === +this.props.campus.id;
         })
         } />
-        <form onSubmit={this.handleSubmit}>
-          <label>Add Student: </label>
-          <select name="select">
-            <option>-</option>
-            {otherStudents.map((student) => {
-              return (
-                <option key={student.id} value={student.id}>{student.name}</option>
-              );
-            })}
-          </select>
-          <button type="submit">Add this student</button>
-        </form>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label>Add Student: </label>
+              <select name="select">
+                {otherStudents.map((student) => {
+                  return (
+                    <option key={student.id} value={student.id}>{student.name}</option>
+                  );
+                })}
+              </select>
+            </div>
+            <div>
+              <button type="submit">Add this student</button>
+            </div>
+          </form>
+        </div>
         <UpdateCampus campus={this.props.campus} />
       </div>
     );

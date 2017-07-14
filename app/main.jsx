@@ -24,7 +24,7 @@ render(
           <Route exact path="/students" component={AllStudents} />
           <Route path="/students/:id" component={SingleStudent} />
           <Route path="/campuses/:id" component={SingleCampus} />
-          <Route path="/" component={Home} />
+          <Route exact path="/" component={Home} />
         </Switch>
         </div>
       </Router>
